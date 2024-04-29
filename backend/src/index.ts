@@ -3,7 +3,6 @@ import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
 import myTodo from "./routes/my-todo";
-import path from "path";
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
