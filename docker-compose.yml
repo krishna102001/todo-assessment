@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  backend:
+    container_name: mern-backend
+    restart: always
+    build: ./backend
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+     networks: 
+      - mern-network
+
+  frontend:
+    container_name: mern-frontend
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+     networks: 
+      - mern-network
+
+  mongo:
+    container_name: mongo-db
+    image: mongo
+    ports: 27017:27017
+    volumes: 
+      - /home/krishna/mongo-backup:/data/db
+    networks: 
+      - mern-network
+
+networks: 
+  mern-network : 
+    driver : bridge
